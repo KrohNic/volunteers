@@ -2,18 +2,39 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Loader from 'components/Loader/Loader';
-// import { ROUTES } from 'constants/routes';
 import HelmetWrapper from 'components/HelmetWrapper/HelmetWrapper';
 import { PageTitles } from 'constants/pageTitles';
+import { ROUTES } from 'constants/routes';
 
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const NavPage = lazy(() => import('pages/NavPage/NavPage'));
+const Citizens = lazy(() => import('pages/Citizens/Citizens'));
+const Volunteers = lazy(() => import('pages/Volunteers/Volunteers'));
 
 const Router = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route index element={<NavPage />} />
+
+        <Route
+          path={ROUTES.citizens}
+          element={
+            <HelmetWrapper helmetTitle={PageTitles.CITIZENS}>
+              <Citizens />
+            </HelmetWrapper>
+          }
+        />
+
+        <Route
+          path={ROUTES.volunteers}
+          element={
+            <HelmetWrapper helmetTitle={PageTitles.VOLUNTEERS}>
+              <Volunteers />
+            </HelmetWrapper>
+          }
+        />
+
         <Route
           path='*'
           element={
