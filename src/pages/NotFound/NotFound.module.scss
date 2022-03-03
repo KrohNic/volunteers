@@ -1,0 +1,53 @@
+@use 'styles/mixins' as mixins;
+@use 'styles/variables' as variables;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  .title {
+    @include mixins.text(
+      variables.$main,
+      10rem,
+      1,
+      600,
+      var(--main-font-color)
+    );
+
+    margin: 0;
+  }
+
+  .subtitle {
+    @include mixins.text(
+      variables.$main,
+      1.9rem,
+      1,
+      600,
+      var(--secondary-font-color)
+    );
+
+    margin: 0 0 30px;
+    text-transform: uppercase;
+  }
+
+  .text {
+    @include mixins.text(
+      variables.$secondary,
+      1.4rem,
+      normal,
+      normal,
+      var(--main-font-color)
+    );
+
+    margin: 0 0 30px;
+  }
+
+  .go_root_btn {
+    padding: 14px;
+    font-size: 2rem;
+  }
+}
