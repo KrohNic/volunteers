@@ -18,7 +18,9 @@ export const getCitizenFormsList = async (
   accessToken: IAuthTokens['accessToken'],
 ): Promise<ICitizenFormDataForTableResponse> => {
   const response = await fetch(
-    `${endpoints.tokens}?limit=${pageSize}&offset=${pageSize * pageNumber}"`,
+    `${endpoints.citizenForm}?limit=${pageSize}&offset=${
+      pageSize * pageNumber
+    }"`,
     {
       method: 'GET',
       headers: {
@@ -96,7 +98,9 @@ export const login = async (
     }),
   });
 
-  const { access, refresh } = response.json() as unknown as {
+  const json = await response.json();
+
+  const { access, refresh } = json as unknown as {
     access: IToken;
     refresh: IToken;
   };
@@ -108,15 +112,19 @@ export const getNewTokens = async (
   refreshToken: IAuthTokens['refreshToken'],
 ): Promise<IAuthTokens> => {
   const response = await fetch(endpoints.refreshTokens, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `JWT ${refreshToken.token}`,
     },
+    body: JSON.stringify({
+      refresh: refreshToken.token,
+    }),
   });
 
-  const { access, refresh } = response.json() as unknown as {
+  const json = await response.json();
+
+  const { access, refresh } = json as unknown as {
     access: IToken;
     refresh: IToken;
   };

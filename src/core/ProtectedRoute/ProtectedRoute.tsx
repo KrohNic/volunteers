@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, Navigate, useLocation } from 'react-router-dom';
 
 import type { IAuthTokens } from 'pages/Login/types.Login';
 
@@ -10,10 +10,10 @@ import Loader from 'components/Loader/Loader';
 import { ROUTES } from 'constants/routes';
 
 const ProtectedRoute: FC = ({ children }) => {
-  const { signin } = useAuth();
+  const { tokens, signin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const updateTokens = useCallback(
     async (refreshToken: IAuthTokens['refreshToken']) => {
@@ -40,7 +40,7 @@ const ProtectedRoute: FC = ({ children }) => {
     const tokenStr = localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
 
     if (tokenStr === null) {
-      navigateToLogin();
+      setIsLoading(false);
       return;
     }
 
@@ -50,6 +50,7 @@ const ProtectedRoute: FC = ({ children }) => {
 
     if (!isAccessExpired) {
       signin(authTokens);
+      setIsLoading(false);
       return;
     }
 
@@ -61,9 +62,17 @@ const ProtectedRoute: FC = ({ children }) => {
     } else {
       navigateToLogin();
     }
+
+    setIsLoading(false);
   }, [navigateToLogin, updateTokens, signin]);
 
   if (isLoading) return <Loader />;
+
+  if (tokens === null) {
+    return (
+      <Navigate to={ROUTES.login} replace state={{ from: location.pathname }} />
+    );
+  }
 
   return <React.Fragment key='child'>{children}</React.Fragment>;
 };
