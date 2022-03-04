@@ -10,6 +10,7 @@ const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const NavPage = lazy(() => import('pages/NavPage/NavPage'));
 const Citizens = lazy(() => import('pages/Citizens/Citizens'));
 const Volunteers = lazy(() => import('pages/Volunteers/Volunteers'));
+const AdminsRoom = lazy(() => import('pages/AdminsRoom/AdminsRoom'));
 
 const Router = () => {
   return (
@@ -31,6 +32,15 @@ const Router = () => {
           element={
             <HelmetWrapper helmetTitle={PageTitles.VOLUNTEERS}>
               <Volunteers />
+            </HelmetWrapper>
+          }
+        />
+
+        <Route
+          path={ROUTES.admins_room}
+          element={
+            <HelmetWrapper helmetTitle={PageTitles.ADMINS_ROOM}>
+              <AdminsRoom />
             </HelmetWrapper>
           }
         />

@@ -1,0 +1,17 @@
+.accepted {
+  color: green;
+
+  &:hover {
+    color: green;
+    text-decoration: underline;
+  }
+}
+
+.waiting {
+  color: crimson;
+
+  &:hover {
+    color: crimson;
+    text-decoration: underline;
+  }
+}

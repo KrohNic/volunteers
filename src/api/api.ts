@@ -1,3 +1,4 @@
+import type { ICitizenFormDataForTableResponse } from 'pages/AdminsRoom/types.AdminsRoom';
 import type {
   ICitizensFormErrors,
   ICitizensFormValues,
@@ -18,4 +19,45 @@ export const saveCitizenForm = async (
   });
 
   return response.json();
+};
+
+export const getCitizenFormsList = (
+  page: number,
+): Promise<ICitizenFormDataForTableResponse> => {
+  return new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          total: 200,
+          data: [
+            {
+              id: 0,
+              name: 'name',
+              last_name: 'last_name',
+              address: 'address',
+              phone_number: 'phone_number',
+              is_done: true,
+            },
+            {
+              id: page,
+              name: 'name',
+              last_name: 'last_name',
+              address: 'address',
+              phone_number: 'phone_number',
+              is_done: false,
+            },
+          ],
+        }),
+      1000,
+    );
+  });
+};
+
+export const setCitizenFormIsDone = (
+  id: number,
+  isDone: boolean,
+): Promise<{ id: number; isDone: boolean }> => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ id, isDone }), 1000);
+  });
 };
