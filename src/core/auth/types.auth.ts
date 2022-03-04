@@ -1,15 +1,7 @@
-export interface IAuthToken {
-  access_token: string;
-  expires_at: string;
-  token_type: string;
-}
+import type { IAuthTokens } from 'pages/Login/types.Login';
 
 export type IAuthContext = {
-  authToken: IAuthToken | null;
-  signin: (
-    token: IAuthToken,
-    remember: boolean,
-    from: string | undefined,
-  ) => void;
+  tokens: IAuthTokens | null;
+  signin: (tokens: IAuthTokens, remember?: boolean) => void;
   signout: () => void;
 };

@@ -7,16 +7,27 @@ import { PageTitles } from 'constants/pageTitles';
 import { ROUTES } from 'constants/routes';
 
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
+const Login = lazy(() => import('pages/Login/Login'));
 const NavPage = lazy(() => import('pages/NavPage/NavPage'));
 const Citizens = lazy(() => import('pages/Citizens/Citizens'));
 const Volunteers = lazy(() => import('pages/Volunteers/Volunteers'));
 const AdminsRoom = lazy(() => import('pages/AdminsRoom/AdminsRoom'));
+const ProtectedRoute = lazy(() => import('core/ProtectedRoute/ProtectedRoute'));
 
 const Router = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route index element={<NavPage />} />
+
+        <Route
+          path={ROUTES.login}
+          element={
+            <HelmetWrapper helmetTitle={PageTitles.LOGIN}>
+              <Login />
+            </HelmetWrapper>
+          }
+        />
 
         <Route
           path={ROUTES.citizens}
@@ -39,9 +50,11 @@ const Router = () => {
         <Route
           path={ROUTES.admins_room}
           element={
-            <HelmetWrapper helmetTitle={PageTitles.ADMINS_ROOM}>
-              <AdminsRoom />
-            </HelmetWrapper>
+            <ProtectedRoute>
+              <HelmetWrapper helmetTitle={PageTitles.ADMINS_ROOM}>
+                <AdminsRoom />
+              </HelmetWrapper>
+            </ProtectedRoute>
           }
         />
 

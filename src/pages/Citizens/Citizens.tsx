@@ -31,10 +31,10 @@ import styles from './Citizens.module.scss';
 
 const Citizens = () => {
   const navigate = useNavigate();
+  const [form] = useForm<ICitizensFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validateTrigger, setValidateTrigger] = useState('onSubmit');
   const [isCaptchaValidated, setIsCaptchaValidated] = useState(false);
-  const [form] = useForm<ICitizensFormValues>();
 
   const onFinish = useCallback(
     async (values: ICitizensFormValues) => {

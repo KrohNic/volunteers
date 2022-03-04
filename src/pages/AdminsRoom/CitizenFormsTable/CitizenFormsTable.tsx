@@ -1,16 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { PageHeader, Table } from 'antd';
+import { Button, PageHeader, Table } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { PageTitles } from 'constants/pageTitles';
 import { ROUTES } from 'constants/routes';
 import { getCitizenFormsList } from 'api/api';
 import { useCitizenTablePage } from 'pages/AdminsRoom/PageProvider/useCitizenTablePage';
+import { useAuth } from 'core/auth/useAuth';
 import { AdminsRoomColumns } from './columns.CitizenFormsTable';
 
 import styles from './CitizenFormsTable.module.scss';
 
 const CitizenFormsTable = () => {
+  const { signout } = useAuth();
   const navigate = useNavigate();
   const [tableData, setTableData] = useCitizenTablePage();
   const [isTableDataLoading, setIsTableDataLoading] = useState(true);
@@ -59,6 +61,11 @@ const CitizenFormsTable = () => {
         onBack={goToParentPage}
         title={PageTitles.ADMINS_ROOM}
         className={styles.header}
+        extra={[
+          <Button key='1' type='text' danger onClick={signout}>
+            Вийти
+          </Button>,
+        ]}
       />
 
       <Table
