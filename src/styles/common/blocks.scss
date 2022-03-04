@@ -4,76 +4,9 @@ html {
 }
 
 body {
-  @include text($main, 1rem, normal, normal, var(--main-font-color));
-}
-
-.ant-picker-dropdown {
-  .ant-picker-header,
-  .ant-picker-cell-in-view,
-  .ant-picker-content th,
-  .ant-picker-cell {
-    font-family: $secondary;
-    font-size: 1.4rem;
-    font-weight: normal;
-  }
-
-  .ant-picker-header,
-  .ant-picker-cell-in-view,
-  .ant-picker-content th {
-    color: var(--main-font-color);
-  }
-}
-
-.link {
-  color: var(--primary-color);
-  transition: color 0.3s;
-
-  &:focus-visible {
-    outline: 1px auto;
-    outline: -webkit-focus-ring-color auto 1px;
-  }
-
-  &:hover {
-    color: var(--primary-hover-color);
-  }
-}
-
-.labeled_checkbox {
-  display: flex;
-  column-gap: 9px;
-  cursor: pointer;
-
-  .ant-form-item-control-input {
-    min-height: auto;
-  }
-
-  .ant-row {
-    margin: 0;
-  }
-
-  .ant-form-item-control-input-content {
-    display: flex;
-  }
-}
-
-.modal_header .ant-modal-header {
-  padding: 32px 32px 16px;
-  border-bottom: 0;
-
-  .ant-modal-title {
-    @include text($main, 2.4rem, 1.3, normal, var(--main-font-color));
-  }
-}
-
-.modal_body .ant-modal-body {
-  padding: 0 32px;
-  padding-bottom: 32px;
-}
-
-.modal_content .ant-modal-content {
-  width: 544px;
-  border-radius: 4px;
-  box-shadow: 0 4px 24px var(--main-shadow-color);
+  font-family: $secondary;
+  font-size: 1rem;
+  color: var(--main-font-color);
 }
 
 .ant-form-item-explain-error {

@@ -7,9 +7,10 @@ import { useCitizenTablePage } from 'pages/AdminsRoom/PageProvider/useCitizenTab
 interface Props {
   formId: number;
   isDone: boolean;
+  onClick?: () => void;
 }
 
-const AcceptFormBtn = ({ isDone, formId }: Props) => {
+const AcceptFormBtn = ({ isDone, formId, onClick = () => {} }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [, setTableData] = useCitizenTablePage();
 
@@ -22,6 +23,8 @@ const AcceptFormBtn = ({ isDone, formId }: Props) => {
 
     setIsLoading(true);
     await setCitizenFormIsDone(formId, !isDone);
+
+    onClick();
 
     if (abortController.signal.aborted) return;
 
@@ -37,7 +40,7 @@ const AcceptFormBtn = ({ isDone, formId }: Props) => {
       return dataCopy;
     });
     setIsLoading(false);
-  }, [isLoading, isDone, formId, abortController, setTableData]);
+  }, [isLoading, isDone, formId, abortController, onClick, setTableData]);
 
   if (isDone)
     return (

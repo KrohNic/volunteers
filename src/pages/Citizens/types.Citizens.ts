@@ -21,6 +21,7 @@ export interface ICitizensFormValues {
   criminal_records: boolean;
   health_characteristics: string;
   additionally: string;
+  is_done: boolean;
 }
 
 export type ICitizensFormErrors = {

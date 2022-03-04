@@ -170,6 +170,14 @@ const Citizens = () => {
         <Form.Item name='is_international_passport' valuePropName='checked'>
           <Checkbox>Є закордонний паспорт</Checkbox>
         </Form.Item>
+
+        <Form.Item name='is_education_doc' valuePropName='checked'>
+          <Checkbox>Є документи про освіту</Checkbox>
+        </Form.Item>
+
+        <Form.Item name='is_childs_birth_certificate' valuePropName='checked'>
+          <Checkbox>Свідоцтво про народження дітей</Checkbox>
+        </Form.Item>
       </fieldset>
 
       <fieldset>

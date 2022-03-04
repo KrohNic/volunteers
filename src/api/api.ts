@@ -58,6 +58,42 @@ export const getCitizenFormsList = (
   });
 };
 
+export const getCitizenForms = (
+  formId: number,
+): Promise<ICitizensFormValues> => {
+  return new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          id: formId,
+          created_at: 'string',
+          updated_at: 'string',
+          city: 'string',
+          name: 'string',
+          last_name: 'string',
+          number_of_people: 2,
+          phone_number: '15151515155',
+          is_passport: true,
+          is_international_passport: false,
+          is_education_doc: true,
+          is_childs_birth_certificate: true,
+          languages: 'string',
+          budget: 412,
+          is_pets: true,
+          is_pet_carrier: false,
+          is_passport_for_animals: true,
+          is_luggage: false,
+          is_point: true,
+          criminal_records: false,
+          health_characteristics: 'string',
+          additionally: '',
+          is_done: true,
+        }),
+      1000,
+    );
+  });
+};
+
 export const setCitizenFormIsDone = (
   id: number,
   isDone: boolean,

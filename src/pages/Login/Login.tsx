@@ -4,6 +4,7 @@ import { useForm } from 'antd/lib/form/Form';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import type { IUserAuth } from 'pages/Login/types.Login';
+import type { LocationFromState } from 'types/types';
 
 import { useAuth } from 'core/auth/useAuth';
 import { login } from 'api/api';
@@ -44,7 +45,7 @@ const Login = () => {
         values.remember,
       );
 
-      const from = (locationState as { from: string } | undefined)?.from;
+      const from = (locationState as LocationFromState)?.from;
 
       if (from !== undefined) navigate(from, { replace: true });
     } else {
