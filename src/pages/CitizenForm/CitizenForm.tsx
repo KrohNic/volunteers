@@ -3,13 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Checkbox, Descriptions } from 'antd';
 
 import type { ICitizensFormValues } from 'pages/Citizens/types.Citizens';
+import type { IAuthTokens } from 'pages/Login/types.Login';
 
-import { getCitizenForms } from 'api/api';
+import { getCitizenForm } from 'api/api';
 import Loader from 'components/Loader/Loader';
 import PageHeaderExitBtn from 'components/PageHeaderExitBtn/PageHeaderExitBtn';
 import { PageTitles } from 'constants/pageTitles';
 import { ROUTES } from 'constants/routes';
 import AcceptFormBtn from 'pages/AdminsRoom/CitizenFormsTable/AcceptFormBtn/AcceptFormBtn';
+import { useAuth } from 'core/auth/useAuth';
 
 import styles from './CitizenForm.module.scss';
 
@@ -17,16 +19,18 @@ const CitizenForm = () => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const [pageData, setPageData] = useState<ICitizensFormValues | null>(null);
+  const { tokens } = useAuth();
+  const { accessToken } = tokens as IAuthTokens;
 
   const load = useCallback(async () => {
     if (formId === undefined) return;
 
     setPageData(null);
 
-    const response = await getCitizenForms(Number(formId));
+    const response = await getCitizenForm(Number(formId), accessToken);
 
     setPageData(response);
-  }, [formId]);
+  }, [accessToken, formId]);
 
   useEffect(() => {
     load();

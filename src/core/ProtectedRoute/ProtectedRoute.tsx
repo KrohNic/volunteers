@@ -5,7 +5,7 @@ import type { IAuthTokens } from 'pages/Login/types.Login';
 
 import { useAuth } from 'core/auth/useAuth';
 import { AUTH_TOKEN_STORAGE_KEY } from 'core/auth/constants.auth';
-import { updateTokens as updateTokensApi } from 'api/api';
+import { getNewTokens as updateTokensApi } from 'api/api';
 import Loader from 'components/Loader/Loader';
 import { ROUTES } from 'constants/routes';
 

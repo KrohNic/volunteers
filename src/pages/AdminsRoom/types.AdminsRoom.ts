@@ -1,6 +1,6 @@
 export interface ICitizenFormDataForTableResponse {
-  total: number;
-  data: {
+  count: number;
+  results: {
     id: number;
     name: string;
     last_name: string;
@@ -11,7 +11,7 @@ export interface ICitizenFormDataForTableResponse {
 }
 
 type ICitizenFormResponseData =
-  ICitizenFormDataForTableResponse['data'][number];
+  ICitizenFormDataForTableResponse['results'][number];
 
 export interface ICitizenFormDataForTable extends ICitizenFormResponseData {
   key: number;

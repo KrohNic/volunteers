@@ -8,7 +8,7 @@ export interface IUserAuthError {
   detail: string;
 }
 
-interface IToken {
+export interface IToken {
   token: string;
   expires_at: string;
   token_type: string;

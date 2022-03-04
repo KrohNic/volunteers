@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from 'antd';
 
+import type { IAuthTokens } from 'pages/Login/types.Login';
+
 import { setCitizenFormIsDone } from 'api/api';
 import { useCitizenTablePage } from 'pages/AdminsRoom/PageProvider/useCitizenTablePage';
+import { useAuth } from 'core/auth/useAuth';
 
 interface Props {
   formId: number;
@@ -13,6 +16,8 @@ interface Props {
 const AcceptFormBtn = ({ isDone, formId, onClick = () => {} }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [, setTableData] = useCitizenTablePage();
+  const { tokens } = useAuth();
+  const { accessToken } = tokens as IAuthTokens;
 
   const abortController = useMemo(() => new AbortController(), []);
 
@@ -22,7 +27,7 @@ const AcceptFormBtn = ({ isDone, formId, onClick = () => {} }: Props) => {
     if (isLoading) return;
 
     setIsLoading(true);
-    await setCitizenFormIsDone(formId, !isDone);
+    await setCitizenFormIsDone(formId, !isDone, accessToken);
 
     onClick();
 
@@ -40,7 +45,15 @@ const AcceptFormBtn = ({ isDone, formId, onClick = () => {} }: Props) => {
       return dataCopy;
     });
     setIsLoading(false);
-  }, [isLoading, isDone, formId, abortController, onClick, setTableData]);
+  }, [
+    isLoading,
+    isDone,
+    formId,
+    abortController,
+    accessToken,
+    onClick,
+    setTableData,
+  ]);
 
   if (isDone)
     return (
