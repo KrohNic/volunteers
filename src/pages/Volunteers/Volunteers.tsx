@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Volunteers = () => {
-  return <div>Volunteers</div>;
+  return <div>Ця сторінка ще перебуває в розробці</div>;
 };
 
 export default Volunteers;

@@ -10,13 +10,13 @@ import { getCitizenFormsList } from 'api/api';
 import { useCitizenTablePage } from 'pages/AdminsRoom/PageProvider/useCitizenTablePage';
 import PageHeaderExitBtn from 'components/PageHeaderExitBtn/PageHeaderExitBtn';
 import { useAuth } from 'core/auth/useAuth';
-import { AdminsRoomColumns } from './columns.CitizenFormsTable';
+import { AdminsRoomColumns } from './columns.CitizensTable';
 
-import styles from './CitizenFormsTable.module.scss';
+import styles from './CitizensTable.module.scss';
 
 const pageSize = 15;
 
-const CitizenFormsTable = () => {
+const CitizensTable = () => {
   const navigate = useNavigate();
   const { tokens } = useAuth();
   const [tableData, setTableData] = useCitizenTablePage();
@@ -85,4 +85,4 @@ const CitizenFormsTable = () => {
   );
 };
 
-export default CitizenFormsTable;
+export default CitizensTable;

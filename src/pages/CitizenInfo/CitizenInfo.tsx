@@ -10,7 +10,7 @@ import Loader from 'components/Loader/Loader';
 import PageHeaderExitBtn from 'components/PageHeaderExitBtn/PageHeaderExitBtn';
 import { PageTitles } from 'constants/pageTitles';
 import { ROUTES } from 'constants/routes';
-import AcceptFormBtn from 'pages/AdminsRoom/CitizenFormsTable/AcceptFormBtn/AcceptFormBtn';
+import AcceptFormBtn from 'pages/AdminsRoom/CitizensTable/AcceptFormBtn/AcceptFormBtn';
 import { useAuth } from 'core/auth/useAuth';
 
 import styles from './CitizenInfo.module.scss';

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import CitizenFormsTable from './CitizenFormsTable/CitizenFormsTable';
+import CitizensTable from './CitizensTable/CitizensTable';
 import { PageProvider } from './PageProvider/PageProvider';
 
 const AdminsRoom = () => (
   <PageProvider>
-    <CitizenFormsTable />
+    <CitizensTable />
   </PageProvider>
 );
 

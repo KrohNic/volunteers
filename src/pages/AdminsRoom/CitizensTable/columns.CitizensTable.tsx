@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import type { ICitizenFormDataForTable } from 'pages/AdminsRoom/types.AdminsRoom';
 
 import { ROUTES } from 'constants/routes';
-import AcceptFormBtn from 'pages/AdminsRoom/CitizenFormsTable/AcceptFormBtn/AcceptFormBtn';
+import AcceptFormBtn from 'pages/AdminsRoom/CitizensTable/AcceptFormBtn/AcceptFormBtn';
 
 import styles from './FormLink.module.scss';
 
