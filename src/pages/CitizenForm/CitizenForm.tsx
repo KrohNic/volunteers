@@ -68,6 +68,18 @@ const CitizenForm = () => {
     setIsCaptchaValidated(value !== null);
   }, []);
 
+  const removeAtSign = useCallback(() => {
+    const prevValue = form.getFieldValue('tg_username');
+    const value = prevValue.replace('@', '');
+
+    form.setFields([
+      {
+        name: 'tg_username',
+        value,
+      },
+    ]);
+  }, [form]);
+
   return (
     <Form
       form={form}
@@ -116,6 +128,21 @@ const CitizenForm = () => {
         ]}
       >
         <Input />
+      </Form.Item>
+
+      <Form.Item
+        label='Telegram username'
+        name='tg_username'
+        rules={[
+          { min: 5, message: 'Введено мало символів' },
+          {
+            pattern: /^(?=\w{5,64}\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)$/,
+            message: 'Невірний формат',
+          },
+          { required: true, message: 'Вкажіть прізвище' },
+        ]}
+      >
+        <Input addonBefore='@' onChange={removeAtSign} />
       </Form.Item>
 
       <Form.Item label='Кількість людей' name='number_of_people' required>

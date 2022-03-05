@@ -5,6 +5,7 @@ export interface ICitizensFormValues {
   city: string;
   name: string;
   last_name: string;
+  tg_username: string;
   number_of_people: number;
   phone_number: string;
   is_passport: boolean;

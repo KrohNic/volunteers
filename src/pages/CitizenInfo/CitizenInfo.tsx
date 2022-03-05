@@ -64,6 +64,10 @@ const CitizenInfo = () => {
           {pageData.last_name}
         </Descriptions.Item>
 
+        <Descriptions.Item label='Telegram username'>
+          {pageData.tg_username}
+        </Descriptions.Item>
+
         <Descriptions.Item label='Кількість людей'>
           {pageData.number_of_people}
         </Descriptions.Item>

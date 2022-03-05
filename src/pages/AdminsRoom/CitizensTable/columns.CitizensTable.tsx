@@ -18,16 +18,28 @@ export const AdminsRoomColumns = [
     title: "Ім'я",
     dataIndex: 'name',
     key: 'name',
-    render: (_: unknown, values: ICitizenFormDataForTable) => (
+    render: (name: string, values: ICitizenFormDataForTable) => (
       <Link
         to={`${ROUTES.citizens}/${values.id}`}
         className={values.is_done ? styles.accepted : styles.waiting}
         title={values.is_done ? 'Заявка прийнята' : 'Заявка не прийнята'}
-      >{`${values.last_name} ${values.name}`}</Link>
+      >{`${values.last_name} ${name}`}</Link>
     ),
   },
   {
-    title: 'Address',
+    title: 'Telegram',
+    dataIndex: 'tg_username',
+    key: 'tg_username',
+    render: (username: string) => (
+      <a
+        href={`https://t.me/${username}`}
+        target='_blank'
+        rel='noreferrer'
+      >{`@${username}`}</a>
+    ),
+  },
+  {
+    title: 'Адреса',
     dataIndex: 'address',
     key: 'address',
   },

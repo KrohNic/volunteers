@@ -6,6 +6,7 @@ export interface ICitizenFormDataForTableResponse {
     last_name: string;
     address: string;
     phone_number: string;
+    tg_username: string;
     is_done: boolean;
   }[];
 }
