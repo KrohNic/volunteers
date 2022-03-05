@@ -10,7 +10,7 @@ const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const Login = lazy(() => import('pages/Login/Login'));
 const NavPage = lazy(() => import('pages/NavPage/NavPage'));
 const CitizenInfo = lazy(() => import('pages/CitizenInfo/CitizenInfo'));
-const Citizens = lazy(() => import('pages/Citizens/Citizens'));
+const CitizenForm = lazy(() => import('pages/CitizenForm/CitizenForm'));
 const Volunteers = lazy(() => import('pages/Volunteers/Volunteers'));
 const AdminsRoom = lazy(() => import('pages/AdminsRoom/AdminsRoom'));
 const ProtectedRoute = lazy(() => import('core/ProtectedRoute/ProtectedRoute'));
@@ -45,7 +45,7 @@ const Router = () => {
           path={ROUTES.citizens}
           element={
             <HelmetWrapper helmetTitle={PageTitles.CITIZENS}>
-              <Citizens />
+              <CitizenForm />
             </HelmetWrapper>
           }
         />

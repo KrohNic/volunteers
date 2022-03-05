@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Checkbox, Descriptions } from 'antd';
 
-import type { ICitizensFormValues } from 'pages/Citizens/types.Citizens';
+import type { ICitizensFormValues } from 'pages/CitizenForm/types.CitizenForm';
 import type { IAuthTokens } from 'pages/Login/types.Login';
 
 import { getCitizenForm } from 'api/api';

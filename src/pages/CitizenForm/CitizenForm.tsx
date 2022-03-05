@@ -16,7 +16,7 @@ import ReactPhoneInput from 'react-phone-input-2';
 import ru from 'react-phone-input-2/lang/ru.json';
 import 'react-phone-input-2/lib/style.css';
 
-import type { ICitizensFormValues } from 'pages/Citizens/types.Citizens';
+import type { ICitizensFormValues } from 'pages/CitizenForm/types.CitizenForm';
 
 import { ROUTES } from 'constants/routes';
 import { PageTitles } from 'constants/pageTitles';
@@ -25,11 +25,11 @@ import { HeightChangeAnimProps } from 'constants/animationProps';
 import {
   animCaptchaTransition,
   citizensFormInitialValues,
-} from './constants.Citizens';
+} from './constants.CitizenForm';
 
-import styles from './Citizens.module.scss';
+import styles from './CitizenForm.module.scss';
 
-const Citizens = () => {
+const CitizenForm = () => {
   const navigate = useNavigate();
   const [form] = useForm<ICitizensFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -260,4 +260,4 @@ const Citizens = () => {
   );
 };
 
-export default Citizens;
+export default CitizenForm;

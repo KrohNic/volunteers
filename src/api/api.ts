@@ -2,7 +2,7 @@ import type { ICitizenFormDataForTableResponse } from 'pages/AdminsRoom/types.Ad
 import type {
   ICitizensFormErrors,
   ICitizensFormValues,
-} from 'pages/Citizens/types.Citizens';
+} from 'pages/CitizenForm/types.CitizenForm';
 import type {
   IAuthTokens,
   IToken,

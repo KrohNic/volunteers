@@ -1,4 +1,4 @@
-import type { ICitizensFormValues } from './types.Citizens';
+import type { ICitizensFormValues } from './types.CitizenForm';
 
 export const citizensFormInitialValues: Partial<ICitizensFormValues> = {
   number_of_people: 1,
