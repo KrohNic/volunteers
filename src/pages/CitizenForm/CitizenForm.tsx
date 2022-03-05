@@ -136,7 +136,7 @@ const CitizenForm = () => {
         rules={[
           { min: 5, message: 'Введено мало символів' },
           {
-            pattern: /^(?=\w{5,64}\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)$/,
+            pattern: /^[a-zA-Z][a-zA-Z0-9]*[_]?[a-zA-Z0-9]+$/,
             message: 'Невірний формат',
           },
           { required: true, message: 'Вкажіть прізвище' },
