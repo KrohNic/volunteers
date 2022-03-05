@@ -71,7 +71,13 @@ const CitizenInfo = () => {
 
         <tr>
           <th>Telegram username</th>
-          <td>{pageData.tg_username}</td>
+          <td>
+            <a
+              href={`https://t.me/${pageData.tg_username}`}
+              target='_blank'
+              rel='noreferrer'
+            >{`@${pageData.tg_username}`}</a>
+          </td>
         </tr>
 
         <tr>
