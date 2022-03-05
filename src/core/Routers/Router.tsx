@@ -9,7 +9,7 @@ import { ROUTES } from 'constants/routes';
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 const Login = lazy(() => import('pages/Login/Login'));
 const NavPage = lazy(() => import('pages/NavPage/NavPage'));
-const CitizenForm = lazy(() => import('pages/CitizenForm/CitizenForm'));
+const CitizenInfo = lazy(() => import('pages/CitizenInfo/CitizenInfo'));
 const Citizens = lazy(() => import('pages/Citizens/Citizens'));
 const Volunteers = lazy(() => import('pages/Volunteers/Volunteers'));
 const AdminsRoom = lazy(() => import('pages/AdminsRoom/AdminsRoom'));
@@ -35,7 +35,7 @@ const Router = () => {
           element={
             <ProtectedRoute>
               <HelmetWrapper helmetTitle={PageTitles.CITIZENS}>
-                <CitizenForm />
+                <CitizenInfo />
               </HelmetWrapper>
             </ProtectedRoute>
           }

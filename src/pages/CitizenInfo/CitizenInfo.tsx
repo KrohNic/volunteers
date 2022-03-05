@@ -13,9 +13,9 @@ import { ROUTES } from 'constants/routes';
 import AcceptFormBtn from 'pages/AdminsRoom/CitizenFormsTable/AcceptFormBtn/AcceptFormBtn';
 import { useAuth } from 'core/auth/useAuth';
 
-import styles from './CitizenForm.module.scss';
+import styles from './CitizenInfo.module.scss';
 
-const CitizenForm = () => {
+const CitizenInfo = () => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const [pageData, setPageData] = useState<ICitizensFormValues | null>(null);
@@ -138,4 +138,4 @@ const CitizenForm = () => {
   );
 };
 
-export default CitizenForm;
+export default CitizenInfo;
