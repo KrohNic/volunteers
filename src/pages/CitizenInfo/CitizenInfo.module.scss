@@ -1,10 +1,37 @@
 .container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 10px auto;
+}
+
+.table {
+  margin: 10px auto 40px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 1.5rem;
+
+  tr {
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--main-border-color);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  th {
+    width: 320px;
+    padding: 3px 5px;
+    text-align: start;
+  }
+
+  td {
+    width: 300px;
+    padding: 0 5px;
+    text-align: center;
+  }
 }
 
 .btn_container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }

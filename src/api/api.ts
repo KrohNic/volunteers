@@ -52,8 +52,8 @@ export const saveCitizenForm = async (
 export const getCitizenForm = async (
   formId: number,
   accessToken: IAuthTokens['accessToken'],
-): Promise<ICitizensFormValues> => {
-  const response = await fetch(`${endpoints.citizenForm}${formId}/`, {
+): Promise<ICitizensFormValues | { status: number }> => {
+  const promise = fetch(`${endpoints.citizenForm}${formId}/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -62,7 +62,17 @@ export const getCitizenForm = async (
     },
   });
 
-  return response.json();
+  try {
+    const response = await promise;
+
+    return await response.json();
+  } catch (error) {
+    const response = await promise;
+
+    if (response.status === 404) return { status: response.status };
+
+    throw error;
+  }
 };
 
 export const setCitizenFormIsDone = async (

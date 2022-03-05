@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Checkbox, Descriptions } from 'antd';
+import { Checkbox } from 'antd';
 
 import type { ICitizensFormValues } from 'pages/CitizenForm/types.CitizenForm';
 import type { IAuthTokens } from 'pages/Login/types.Login';
@@ -29,8 +29,12 @@ const CitizenInfo = () => {
 
     const response = await getCitizenForm(Number(formId), accessToken);
 
-    setPageData(response);
-  }, [accessToken, formId]);
+    if ('status' in response) {
+      navigate(ROUTES.notFound, { state: { from: window.location.href } });
+    } else {
+      setPageData(response);
+    }
+  }, [accessToken, formId, navigate]);
 
   useEffect(() => {
     load();
@@ -49,87 +53,127 @@ const CitizenInfo = () => {
         goToParentPage={goToParentPage}
       />
 
-      <Descriptions
-        labelStyle={{
-          fontWeight: 'bold',
-          padding: '0 0 0 10px',
-        }}
-        contentStyle={{ padding: '0 10px 0 0', textAlign: 'right' }}
-      >
-        <Descriptions.Item label='Місто'>{pageData.city}</Descriptions.Item>
+      <table className={styles.table}>
+        <tr>
+          <th>Місто</th>
+          <td>{pageData.city}</td>
+        </tr>
 
-        <Descriptions.Item label="Ім'я">{pageData.name}</Descriptions.Item>
+        <tr>
+          <th>Ім&apos;я</th>
+          <td>{pageData.name}</td>
+        </tr>
 
-        <Descriptions.Item label='Прізвище'>
-          {pageData.last_name}
-        </Descriptions.Item>
+        <tr>
+          <th>Прізвище</th>
+          <td>{pageData.last_name}</td>
+        </tr>
 
-        <Descriptions.Item label='Telegram username'>
-          {pageData.tg_username}
-        </Descriptions.Item>
+        <tr>
+          <th>Telegram username</th>
+          <td>{pageData.tg_username}</td>
+        </tr>
 
-        <Descriptions.Item label='Кількість людей'>
-          {pageData.number_of_people}
-        </Descriptions.Item>
+        <tr>
+          <th>Кількість людей</th>
+          <td>{pageData.number_of_people}</td>
+        </tr>
 
-        <Descriptions.Item label='Номер телефону'>
-          {pageData.phone_number}
-        </Descriptions.Item>
+        <tr>
+          <th>Номер телефону</th>
+          <td>{pageData.phone_number}</td>
+        </tr>
 
-        <Descriptions.Item label='Мови'>
-          {pageData.languages || '-'}
-        </Descriptions.Item>
+        <tr>
+          <th>Мови</th>
+          <td>{pageData.languages || '-'}</td>
+        </tr>
 
-        <Descriptions.Item label='Бюджет'>{pageData.budget}</Descriptions.Item>
+        <tr>
+          <th>Бюджет</th>
+          <td>{pageData.budget}</td>
+        </tr>
 
-        <Descriptions.Item label='Захворювання'>
-          {pageData.health_characteristics || '-'}
-        </Descriptions.Item>
+        <tr>
+          <th>Захворювання</th>
+          <td>{pageData.health_characteristics || '-'}</td>
+        </tr>
 
-        <Descriptions.Item label='Є паспорт'>
-          <Checkbox checked={pageData.is_passport} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є паспорт</th>
+          <td>
+            <Checkbox checked={pageData.is_passport} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Є закордонний паспорт'>
-          <Checkbox checked={pageData.is_international_passport} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є закордонний паспорт</th>
+          <td>
+            <Checkbox checked={pageData.is_international_passport} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Є документи про освіту'>
-          <Checkbox checked={pageData.is_education_doc} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є документи про освіту</th>
+          <td>
+            <Checkbox checked={pageData.is_education_doc} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Свідоцтво про народження дітей'>
-          <Checkbox checked={pageData.is_childs_birth_certificate} />
-        </Descriptions.Item>
+        <tr>
+          <th>Свідоцтво про народження дітей</th>
+          <td>
+            <Checkbox checked={pageData.is_childs_birth_certificate} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Є тварины'>
-          <Checkbox checked={pageData.is_pets} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є тварины</th>
+          <td>
+            <Checkbox checked={pageData.is_pets} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Переноска на тварин'>
-          <Checkbox checked={pageData.is_pet_carrier} />
-        </Descriptions.Item>
+        <tr>
+          <th>Переноска на тварин</th>
+          <td>
+            <Checkbox checked={pageData.is_pet_carrier} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Паспорт на тварин'>
-          <Checkbox checked={pageData.is_passport_for_animals} />
-        </Descriptions.Item>
+        <tr>
+          <th>Паспорт на тварин</th>
+          <td>
+            <Checkbox checked={pageData.is_passport_for_animals} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Є судимість'>
-          <Checkbox checked={pageData.criminal_records} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є судимість</th>
+          <td>
+            <Checkbox checked={pageData.criminal_records} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Є багаж'>
-          <Checkbox checked={pageData.is_luggage} />
-        </Descriptions.Item>
+        <tr>
+          <th>Є багаж</th>
+          <td>
+            <Checkbox checked={pageData.is_luggage} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Можете дістатися до точки відправлення'>
-          <Checkbox checked={pageData.is_point} />
-        </Descriptions.Item>
+        <tr>
+          <th>Можете дістатися до точки відправлення</th>
+          <td>
+            <Checkbox checked={pageData.is_point} />
+          </td>
+        </tr>
 
-        <Descriptions.Item label='Додаткова інформація'>
-          {pageData.additionally || '-'}
-        </Descriptions.Item>
-      </Descriptions>
+        <tr>
+          <th>Додаткова інформація</th>
+          <td>{pageData.additionally || '-'}</td>
+        </tr>
+      </table>
 
       <div className={styles.btn_container}>
         <AcceptFormBtn
