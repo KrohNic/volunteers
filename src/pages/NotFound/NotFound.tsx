@@ -15,20 +15,16 @@ const NotFound = () => {
     <div className={styles.layout}>
       <h1 className={styles.title}>404</h1>
 
-      <h5 className={styles.subtitle}>Page not found</h5>
+      <h5 className={styles.subtitle}>Сторінку не знайдено</h5>
 
       {from ? (
-        <p className={styles.text}>
-          The Page &quot;{from}&quot; does not exist.
-        </p>
+        <p className={styles.text}>Сторінка &quot;{from}&quot; не існує.</p>
       ) : (
-        <p className={styles.text}>
-          The Page you are looking for does not exist.
-        </p>
+        <p className={styles.text}>Сторінка, яку ви шукаєте, не існує.</p>
       )}
 
       <Link className={styles.go_root_btn} to={ROUTES.root}>
-        Go to the home page
+        Перейдіть на домашню сторінку
       </Link>
     </div>
   );

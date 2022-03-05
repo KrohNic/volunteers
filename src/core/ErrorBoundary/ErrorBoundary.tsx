@@ -70,14 +70,14 @@ export class ErrorBoundary extends Component<Props, State> {
     if (hasError) {
       return (
         <div className={styles.main_layout}>
-          <h3 className={styles.title}>Похоже, произошёл сбой</h3>
+          <h3 className={styles.title}>Схоже, стався збій</h3>
           <span className={styles.text}>{`${errorName}: ${errorMsg}`}</span>
           <Button
             type='primary'
             onClick={ErrorBoundary.handleReload}
             className={styles.go_root_btn}
           >
-            Перейти на главную страницу
+            Перейти на головну сторінку
           </Button>
         </div>
       );
