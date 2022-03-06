@@ -40,7 +40,6 @@ const Login = () => {
       signin(
         {
           accessToken: response.accessToken,
-          refreshToken: response.refreshToken,
         },
         values.remember,
       );

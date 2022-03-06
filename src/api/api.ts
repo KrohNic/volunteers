@@ -102,34 +102,9 @@ export const login = async (
 
   const json = await response.json();
 
-  const { access, refresh } = json as unknown as {
+  const { access } = json as unknown as {
     access: IToken;
-    refresh: IToken;
   };
 
-  return { accessToken: access, refreshToken: refresh };
-};
-
-export const getNewTokens = async (
-  refreshToken: IAuthTokens['refreshToken'],
-): Promise<IAuthTokens> => {
-  const response = await fetch(endpoints.refreshTokens, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      refresh: refreshToken.token,
-    }),
-  });
-
-  const json = await response.json();
-
-  const { access, refresh } = json as unknown as {
-    access: IToken;
-    refresh: IToken;
-  };
-
-  return { accessToken: access, refreshToken: refresh };
+  return { accessToken: access };
 };

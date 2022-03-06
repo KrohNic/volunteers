@@ -16,5 +16,4 @@ export interface IToken {
 
 export interface IAuthTokens {
   accessToken: IToken;
-  refreshToken: IToken;
 }

@@ -5,7 +5,6 @@ import type { IAuthTokens } from 'pages/Login/types.Login';
 
 import { useAuth } from 'core/auth/useAuth';
 import { AUTH_TOKEN_STORAGE_KEY } from 'core/auth/constants.auth';
-import { getNewTokens as updateTokensApi } from 'api/api';
 import Loader from 'components/Loader/Loader';
 import { ROUTES } from 'constants/routes';
 
@@ -14,18 +13,6 @@ const ProtectedRoute: FC = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-
-  const updateTokens = useCallback(
-    async (refreshToken: IAuthTokens['refreshToken']) => {
-      setIsLoading(true);
-
-      const newTokens = await updateTokensApi(refreshToken);
-
-      signin(newTokens, true);
-      setIsLoading(false);
-    },
-    [signin],
-  );
 
   const navigateToLogin = useCallback(
     () =>
@@ -45,26 +32,18 @@ const ProtectedRoute: FC = ({ children }) => {
     }
 
     const authTokens = JSON.parse(tokenStr) as IAuthTokens;
+    const fiveMinAfterNow = new Date(new Date().getTime() + 5 * 60 * 1000);
     const isAccessExpired =
-      new Date(authTokens.accessToken.expires_at) < new Date();
+      new Date(authTokens.accessToken.expires_at) < fiveMinAfterNow;
 
     if (!isAccessExpired) {
       signin(authTokens);
-      setIsLoading(false);
-      return;
-    }
-
-    const isRefreshExpired =
-      new Date(authTokens.refreshToken.expires_at) < new Date();
-
-    if (!isRefreshExpired) {
-      updateTokens(authTokens.refreshToken);
     } else {
       navigateToLogin();
     }
 
     setIsLoading(false);
-  }, [navigateToLogin, updateTokens, signin]);
+  }, [navigateToLogin, signin]);
 
   if (isLoading) return <Loader />;
 
