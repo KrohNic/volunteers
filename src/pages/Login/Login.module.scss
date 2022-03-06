@@ -7,3 +7,11 @@
 .form {
   margin: auto;
 }
+
+.captcha {
+  display: flex;
+  justify-content: center;
+  box-sizing: content-box;
+  padding-bottom: 20px;
+  overflow-y: hidden;
+}

@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import type { IUserAuth } from 'pages/Login/types.Login';
 import type { LocationFromState } from 'types/types';
 
 import { useAuth } from 'core/auth/useAuth';
 import { login } from 'api/api';
+import { animCaptchaTransition } from 'pages/CitizenForm/constants.CitizenForm';
+import { HeightChangeAnimProps } from 'constants/animationProps';
 
 import styles from './Login.module.scss';
 
@@ -20,6 +24,7 @@ const Login = () => {
   const [form] = useForm<IUserAuth>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validateTrigger, setValidateTrigger] = useState('onSubmit');
+  const [isCaptchaValidated, setIsCaptchaValidated] = useState(false);
 
   const onFinish = async (values: IUserAuth) => {
     setIsSubmitting(true);
@@ -55,6 +60,10 @@ const Login = () => {
   };
 
   const onFinishFailed = () => setValidateTrigger('onChange');
+
+  const validateCaptcha = useCallback((value) => {
+    setIsCaptchaValidated(value !== null);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -100,12 +109,29 @@ const Login = () => {
           <Checkbox>Запам&apos;ятати мене</Checkbox>
         </Form.Item>
 
+        <AnimatePresence initial={false}>
+          {!isCaptchaValidated && (
+            <motion.div
+              initial={HeightChangeAnimProps.initial}
+              animate={HeightChangeAnimProps.animate}
+              exit={HeightChangeAnimProps.exit}
+              transition={animCaptchaTransition}
+              className={styles.captcha}
+            >
+              <ReCAPTCHA
+                sitekey='6LeambEeAAAAAN1QVUucIH0E_sIl7DFGx7zoZu0Y'
+                onChange={validateCaptcha}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button
             type='primary'
             htmlType='submit'
             loading={isSubmitting}
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isCaptchaValidated}
           >
             Увійти
           </Button>
