@@ -6,8 +6,6 @@ import type { ICitizenFormDataForTable } from 'pages/AdminsRoom/types.AdminsRoom
 import { ROUTES } from 'constants/routes';
 import AcceptFormBtn from 'pages/AdminsRoom/CitizensTable/AcceptFormBtn/AcceptFormBtn';
 
-import styles from './FormLink.module.scss';
-
 export const AdminsRoomColumns = [
   {
     title: 'Id',
@@ -21,7 +19,6 @@ export const AdminsRoomColumns = [
     render: (name: string, values: ICitizenFormDataForTable) => (
       <Link
         to={`${ROUTES.citizens}/${values.id}`}
-        className={values.is_done ? styles.accepted : styles.waiting}
         title={values.is_done ? 'Заявка прийнята' : 'Заявка не прийнята'}
       >{`${values.last_name} ${name}`}</Link>
     ),

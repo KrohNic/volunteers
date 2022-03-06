@@ -3,3 +3,23 @@
   margin: auto;
   padding: 10px;
 }
+
+.done_row {
+  background-color: var(--done-color);
+
+  &:hover td {
+    /* stylelint-disable declaration-no-important */
+    background-color: var(--done-color) !important;
+    /* stylelint-enable */
+  }
+}
+
+.undone_row {
+  background-color: var(--undone-color);
+
+  &:hover td {
+    /* stylelint-disable declaration-no-important */
+    background-color: var(--undone-color) !important;
+    /* stylelint-enable */
+  }
+}

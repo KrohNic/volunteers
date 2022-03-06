@@ -16,6 +16,9 @@ import styles from './CitizensTable.module.scss';
 
 const pageSize = 15;
 
+const getRowClassName = ({ is_done }: { is_done: boolean }) =>
+  is_done ? styles.done_row : styles.undone_row;
+
 const CitizensTable = () => {
   const navigate = useNavigate();
   const { tokens } = useAuth();
@@ -78,6 +81,7 @@ const CitizensTable = () => {
         dataSource={tableData}
         loading={isTableDataLoading}
         pagination={pagination}
+        rowClassName={getRowClassName}
         size='small'
         sticky
       />
