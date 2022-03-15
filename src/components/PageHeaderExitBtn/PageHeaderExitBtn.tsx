@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button, PageHeader } from 'antd';
 
 import { useAuth } from 'core/auth/useAuth';
@@ -13,13 +13,15 @@ interface Props {
 const PageHeaderExitBtn = ({ title, goToParentPage }: Props) => {
   const { signout } = useAuth();
 
+  const onClick = useCallback(() => signout(), [signout]);
+
   return (
     <PageHeader
       onBack={goToParentPage}
       title={title}
       className={styles.header}
       extra={[
-        <Button key='1' type='text' danger onClick={signout}>
+        <Button key='1' type='text' danger onClick={onClick}>
           Вийти
         </Button>,
       ]}

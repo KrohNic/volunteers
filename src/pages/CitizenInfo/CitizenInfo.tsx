@@ -19,7 +19,7 @@ const CitizenInfo = () => {
   const { formId } = useParams();
   const navigate = useNavigate();
   const [pageData, setPageData] = useState<ICitizensFormValues | null>(null);
-  const { tokens } = useAuth();
+  const { tokens, signout } = useAuth();
   const { accessToken } = tokens as IAuthTokens;
 
   const load = useCallback(async () => {
@@ -29,12 +29,14 @@ const CitizenInfo = () => {
 
     const response = await getCitizenForm(Number(formId), accessToken);
 
-    if ('status' in response) {
-      navigate(ROUTES.notFound, { state: { from: window.location.href } });
-    } else {
+    if (!('status' in response)) {
       setPageData(response);
+    } else if (response.status === 404) {
+      navigate(ROUTES.notFound, { state: { from: window.location.href } });
+    } else if (response.status === 401) {
+      signout(window.location.href);
     }
-  }, [accessToken, formId, navigate]);
+  }, [accessToken, formId, signout, navigate]);
 
   useEffect(() => {
     load();

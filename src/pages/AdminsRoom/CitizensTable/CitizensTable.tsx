@@ -10,6 +10,7 @@ import { getCitizenFormsList } from 'api/api';
 import { useCitizenTablePage } from 'pages/AdminsRoom/PageProvider/useCitizenTablePage';
 import PageHeaderExitBtn from 'components/PageHeaderExitBtn/PageHeaderExitBtn';
 import { useAuth } from 'core/auth/useAuth';
+import { AccessError } from 'core/AccessError/AccessError';
 import { AdminsRoomColumns } from './columns.CitizensTable';
 
 import styles from './CitizensTable.module.scss';
@@ -21,7 +22,7 @@ const getRowClassName = ({ is_done }: { is_done: boolean }) =>
 
 const CitizensTable = () => {
   const navigate = useNavigate();
-  const { tokens } = useAuth();
+  const { tokens, signout } = useAuth();
   const [tableData, setTableData] = useCitizenTablePage();
   const [isTableDataLoading, setIsTableDataLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(1);
@@ -35,23 +36,28 @@ const CitizensTable = () => {
     const load = async () => {
       setIsTableDataLoading(true);
 
-      const { count, results } = await getCitizenFormsList(
-        pageNumber,
-        pageSize,
-        accessToken,
-      );
+      try {
+        const { count, results } = await getCitizenFormsList(
+          pageNumber,
+          pageSize,
+          accessToken,
+        );
 
-      if (abortController.signal.aborted) return;
+        if (abortController.signal.aborted) return;
 
-      setTableData(results.map((item) => ({ ...item, key: item.id })));
-      setTotalTableItems(count);
-      setIsTableDataLoading(false);
+        setTableData(results.map((item) => ({ ...item, key: item.id })));
+        setTotalTableItems(count);
+        setIsTableDataLoading(false);
+      } catch (error) {
+        if (error instanceof AccessError) signout(window.location.href);
+        else throw error;
+      }
     };
 
     load();
 
     return () => abortController.abort();
-  }, [pageNumber, accessToken, setTableData]);
+  }, [pageNumber, accessToken, setTableData, signout]);
 
   const goToParentPage = useCallback(() => navigate(ROUTES.root), [navigate]);
 

@@ -10,6 +10,7 @@ import type {
   IUserAuthError,
 } from 'pages/Login/types.Login';
 
+import { AccessError } from 'core/AccessError/AccessError';
 import * as endpoints from './endpoints';
 
 export const getCitizenFormsList = async (
@@ -30,6 +31,8 @@ export const getCitizenFormsList = async (
       },
     },
   );
+
+  if (response.status === 401) throw new AccessError();
 
   return response.json();
 };
@@ -62,7 +65,9 @@ export const getCitizenForm = async (
     },
   });
 
-  if (response.status === 404) return { status: response.status };
+  if (response.status === 404 || response.status === 401) {
+    return { status: response.status };
+  }
 
   return response.json();
 };
@@ -81,6 +86,8 @@ export const setCitizenFormIsDone = async (
     },
     body: JSON.stringify({ is_done: isDone }),
   });
+
+  if (response.status === 401) throw new AccessError();
 
   return response.json();
 };

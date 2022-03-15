@@ -34,11 +34,20 @@ export const AuthProvider: FC = ({ children }) => {
     [],
   );
 
-  const signout = useCallback(() => {
-    localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
-    setAuthTokens(null);
-    navigate(ROUTES.root);
-  }, [navigate]);
+  const signout = useCallback(
+    (from?: string) => {
+      localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY);
+      setAuthTokens(null);
+
+      if (from !== undefined)
+        navigate(ROUTES.login, {
+          replace: true,
+          state: { from },
+        });
+      else navigate(ROUTES.root);
+    },
+    [navigate],
+  );
 
   const value = useMemo(
     () => ({ tokens: authTokens, signin, signout }),
